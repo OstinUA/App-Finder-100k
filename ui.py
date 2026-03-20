@@ -12,6 +12,16 @@ from db import clear_seen_apps, seen_apps_count
 
 
 def render_sidebar() -> dict:
+    """Render the Streamlit sidebar and return the selected search options.
+
+    Returns:
+        dict: A dictionary containing normalized numeric limits and sorting
+        preferences selected by the user.
+
+    Examples:
+        >>> isinstance(render_sidebar(), dict)
+        True
+    """
     st.sidebar.header("Параметры поиска")
 
     min_installs = st.sidebar.number_input(
@@ -47,6 +57,21 @@ def render_sidebar() -> dict:
 
 
 def render_results(found_apps: list[dict], selected_queries: list[str], results_limit: int):
+    """Render the result table and CSV download controls in Streamlit.
+
+    Args:
+        found_apps (list[dict]): Normalized application rows prepared for
+            display.
+        selected_queries (list[str]): The sampled search phrases used for the
+            current run.
+        results_limit (int): The maximum number of rows to display and export.
+
+    Returns:
+        None: This function writes UI elements directly to the Streamlit page.
+
+    Examples:
+        >>> render_results([], ["puzzle"], 10)
+    """
     if not found_apps:
         st.warning(
             "Ничего не найдено. Снизьте минимум скачиваний или уберите ограничение максимума."
