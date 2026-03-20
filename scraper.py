@@ -17,6 +17,22 @@ from db import get_cached_details, set_cached_details
 
 @st.cache_data(show_spinner=False, ttl=CACHE_TTL_SEARCH)
 def _fetch_search(query: str, lang: str, country: str, limit: int) -> list:
+    """Fetch Google Play search results for a localized query.
+
+    Args:
+        query (str): The search phrase to submit to Google Play.
+        lang (str): The language code used by the scraper request.
+        country (str): The country code used to localize search results.
+        limit (int): The maximum number of hits to request.
+
+    Returns:
+        list: A list of raw search result dictionaries. Returns an empty list
+        when the scraper request fails.
+
+    Examples:
+        >>> isinstance(_fetch_search("puzzle", "en", "us", 10), list)
+        True
+    """
     try:
         return search(query, lang=lang, country=country, n_hits=limit)
     except Exception:
@@ -24,6 +40,20 @@ def _fetch_search(query: str, lang: str, country: str, limit: int) -> list:
 
 
 def _fetch_details(app_id: str) -> dict | None:
+    """Fetch and cache detailed metadata for a Google Play application.
+
+    Args:
+        app_id (str): The Google Play application ID to retrieve.
+
+    Returns:
+        dict | None: The application details dictionary when retrieval succeeds,
+        otherwise ``None`` if the scraper raises an exception.
+
+    Examples:
+        >>> result = _fetch_details("com.example.app")
+        >>> result is None or isinstance(result, dict)
+        True
+    """
     cached = get_cached_details(app_id)
     if cached:
         return cached
@@ -40,6 +70,25 @@ def collect_candidates(
     search_limit: int,
     seen_apps: set,
 ) -> list[str]:
+    """Collect unique unseen application IDs from randomized search queries.
+
+    Args:
+        queries_per_run (int): The number of keywords to sample for the current
+            run.
+        search_limit (int): The number of search hits to request per keyword and
+            locale combination.
+        seen_apps (set): A set of application IDs that should be excluded from
+            the candidate list.
+
+    Returns:
+        list[str]: A de-duplicated list of unseen Google Play application IDs
+        discovered across the sampled queries and locales.
+
+    Examples:
+        >>> candidates = collect_candidates(2, 5, set())
+        >>> isinstance(candidates, list)
+        True
+    """
     selected_queries = random.sample(ALL_KEYWORDS, k=min(queries_per_run, len(ALL_KEYWORDS)))
     selected_locales = random.sample(SEARCH_LOCALES, k=min(4, len(SEARCH_LOCALES)))
 
@@ -63,6 +112,24 @@ def fetch_details_batch(
     max_installs: int,
     results_limit: int,
 ) -> list[dict]:
+    """Fetch, filter, and normalize metadata for a sampled batch of apps.
+
+    Args:
+        app_ids (list[str]): Candidate application IDs to inspect.
+        min_installs (int): The minimum install count allowed in the output.
+        max_installs (int): The maximum install count allowed in the output. A
+            value of ``0`` disables the upper bound.
+        results_limit (int): The target number of results shown to the user and
+            the basis for the background sampling size.
+
+    Returns:
+        list[dict]: A list of normalized application rows ready for display in
+        the UI.
+
+    Examples:
+        >>> isinstance(fetch_details_batch([], 0, 0, 10), list)
+        True
+    """
     sample_size = min(len(app_ids), results_limit * 8)
     sampled = random.sample(app_ids, sample_size) if sample_size else []
 
@@ -107,6 +174,19 @@ def fetch_details_batch(
 
 
 def _parse_installs(val) -> int:
+    """Convert a Google Play installs string into an integer count.
+
+    Args:
+        val (Any): A raw installs value such as ``"100,000+"`` or ``None``.
+
+    Returns:
+        int: The parsed install count, or ``0`` when the value is missing or
+        cannot be interpreted as an integer.
+
+    Examples:
+        >>> _parse_installs("100,000+")
+        100000
+    """
     if not val:
         return 0
     try:
