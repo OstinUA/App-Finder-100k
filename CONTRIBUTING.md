@@ -1,190 +1,60 @@
-# Contributing Guide
+<div align="left">
 
-First off: thanks for investing time in this project. Contributions are welcome and appreciated, whether you’re fixing edge cases, improving ranking logic, hardening data flows, or polishing docs.
+<pre>
+ ██████╗ ██████╗ ███╗   ██╗████████╗██████╗ ██╗██████╗ ██╗   ██╗████████╗██╗███╗   ██╗ ██████╗ 
+██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██║██╔══██╗██║   ██║╚══██╔══╝██║████╗  ██║██╔════╝ 
+██║     ██║   ██║██╔██╗ ██║   ██║   ██████╔╝██║██████╔╝██║   ██║   ██║   ██║██╔██╗ ██║██║  ███╗
+██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██╗██║██╔══██╗██║   ██║   ██║   ██║██║╚██╗██║██║   ██║
+╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║██║██████╔╝╚██████╔╝   ██║   ██║██║ ╚████║╚██████╔╝
+ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═════╝  ╚═════╝    ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ 
+                                                                                               
+ ██████╗ ██╗   ██╗██╗██████╗ ███████╗
+██╔════╝ ██║   ██║██║██╔══██╗██╔════╝
+██║  ███╗██║   ██║██║██║  ██║█████╗  
+██║   ██║██║   ██║██║██║  ██║██╔══╝  
+╚██████╔╝╚██████╔╝██║██████╔╝███████╗
+ ╚═════╝  ╚═════╝ ╚═╝╚═════╝ ╚══════╝
+</pre>
 
-This repo is a practical research tool, so contributions should optimize for reliability, reproducibility, and signal quality.
+</div>
 
-## I Have a Question
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-3e80ed?style=for-the-badge&logo=github&logoColor=white)](https://github.com/OstinUA)
+[![Open Source](https://img.shields.io/badge/Open_Source-Yes-brightgreen?style=for-the-badge&logo=open-source&logoColor=white)](https://github.com/OstinUA)
+[![Views](https://img.shields.io/badge/Profile_Views-%31&#56;%33-blueviolet?style=for-the-badge)](https://github.com/OstinUA)
+[![OstinUA](https://capsule-render.vercel.app/api?type=rect&color=3e80ed&height=2&)](https://github.com/OstinUA)
 
-Please **do not** use GitHub Issues for general usage questions.
 
-Issues are reserved for actionable engineering work (bugs, enhancements, regressions). For questions, use one of these channels instead:
+Hello! Thank you for your interest in contributing to this project. I am always open to any help, whether it's fixing bugs, adding new features, improving documentation, or just sharing fresh ideas. 
 
-- GitHub Discussions (preferred, if enabled)
-- Stack Overflow (`streamlit`, `python`, `google-play-scraper` tags)
-- Maintainer social links in `README.md`
+This document is not a strict set of rules, but a simple guide on how we can comfortably and productively work together.
 
-When asking a question, include:
+## ⬢ How You Can Help
 
-- What you’re trying to achieve
-- What you already tried
-- Relevant logs/screenshots
-- Your runtime environment
+* **Found a bug?** Open an Issue and briefly describe what went wrong and how to reproduce it.
+* **Have a cool idea?** Create an Issue with your proposal. It's always best to discuss an idea first before spending time writing code.
+* **Improving documentation.** Fixing typos, expanding instructions, or translating — absolutely any help is valuable.
+* **Ready to write code?** Feel free to fork the repository and open a Pull Request.
 
-## Reporting Bugs
+## ⬢ Pull Request Process
 
-Before opening a bug report:
+The workflow here is as straightforward as possible:
 
-1. Check existing open/closed issues for duplicates.
-2. Re-test on the latest `main` branch.
-3. Verify the issue is reproducible with clean local state if possible (e.g., clear `seen_apps.db`).
+1. Fork this repository.
+2. Create a new branch for your changes (`git checkout -b feature/my-awesome-idea` or `git checkout -b bugfix/issue-123`).
+3. Make your changes and commit them (`git commit -m "Add new awesome feature"`).
+4. Push the changes to your fork (`git push origin feature/my-awesome-idea`).
+5. Open a Pull Request to this repository.
 
-### Bug report checklist
+## ⬢ A Few Simple Requests
 
-A high-quality report includes:
+* Try to stick to the code style already used in the project.
+* Make your commit messages clear so it's easy to understand what changed.
+* If your Pull Request resolves a specific Issue, mention its number in the description (e.g., `Closes #42`).
+* If the logic changes, please update the relevant section in the README.
 
-- **Environment**
-  - OS and version
-  - Python version
-  - `streamlit` version
-  - project commit SHA/branch
-- **Steps to reproduce**
-  - deterministic sequence from launch to failure
-- **Expected behavior**
-  - what should happen
-- **Actual behavior**
-  - what happened instead
-- **Artifacts**
-  - logs, stack traces, screenshots, sample CSV output (if relevant)
+## ⬢ Feedback
 
-## Suggesting Enhancements
+I try to review all Issues and Pull Requests as quickly as possible. If I haven't replied in a while, don't hesitate to ping me in the comments.
 
-Enhancement proposals are welcome, but keep them problem-first.
-
-Good feature requests include:
-
-- **Problem statement:** what pain point exists today
-- **Proposed change:** what you want to add/modify
-- **Use cases:** concrete scenarios and target users
-- **Tradeoffs:** complexity, performance, or maintenance cost
-
-If your proposal alters ranking/scoring behavior, include before/after examples.
-
-## Local Development / Setup
-
-```bash
-# 1) Fork on GitHub, then clone your fork
-git clone https://github.com/<your-username>/App-Finder-100k.git
-cd App-Finder-100k
-
-# 2) Create virtual env
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-
-# 3) Install dependencies
-pip install --upgrade pip
-pip install -r requirements.txt
-
-# 4) Run app locally
-streamlit run app.py
-```
-
-No `.env` bootstrap is required right now. Runtime settings are managed in `config.py`.
-
-## Pull Request Process
-
-### Branch strategy
-
-Use descriptive branch names:
-
-- `feature/<short-slug>`
-- `bugfix/<issue-id-or-slug>`
-- `docs/<short-slug>`
-- `refactor/<short-slug>`
-
-Examples:
-
-- `feature/locale-weighting`
-- `bugfix/123-install-parse`
-- `docs/readme-refresh`
-
-### Commit style
-
-Use **Conventional Commits**:
-
-- `feat: add locale prioritization toggle`
-- `fix: handle missing install strings in parser`
-- `docs: rewrite README and add contribution guide`
-- `refactor: split UI rendering helpers`
-- `test: add novelty score unit coverage`
-
-### Sync with upstream
-
-Before opening PR, sync with latest `main`:
-
-```bash
-git fetch upstream
-git rebase upstream/main
-```
-
-### PR description requirements
-
-Every PR should include:
-
-- Summary of changes
-- Why the change is needed
-- Testing notes (commands + outcomes)
-- Linked issue(s) (`Closes #123` when applicable)
-- Screenshots/GIFs for UI-visible changes
-
-Keep PRs focused. A small, surgical PR merges faster than a giant mixed bag.
-
-## Styleguides
-
-### Code quality
-
-- Follow existing project structure and naming.
-- Prefer readable, explicit logic over “clever” one-liners.
-- Keep functions single-purpose and composable.
-- Avoid unrelated refactors in functional PRs.
-
-### Tooling
-
-This repo currently has minimal enforced tooling.
-
-Recommended local checks:
-
-```bash
-python -m compileall .
-```
-
-If you introduce new tooling (formatter/linter/test framework), include config in the same PR and document why it improves team velocity.
-
-### Architecture conventions
-
-- `app.py`: orchestration layer only.
-- `ui.py`: Streamlit widgets/rendering concerns.
-- `scraper.py`: external data collection and filtering logic.
-- `db.py`: persistence/cache primitives.
-- `scoring.py`: ranking and novelty logic.
-- `config.py`: constants/defaults.
-
-## Testing
-
-All new behavior should be validated before PR submission.
-
-Minimum expectation:
-
-- Run syntax sanity checks.
-- Run the app and exercise affected path manually.
-- Validate no regression in CSV export and sidebar controls when relevant.
-
-Suggested commands:
-
-```bash
-python -m compileall .
-streamlit run app.py
-```
-
-If you add non-trivial logic (especially scoring or parsing), include automated tests.
-
-## Code Review Process
-
-- Maintainer reviews incoming PRs.
-- Expect at least one approval before merge.
-- Address review comments with incremental commits or clean fixup/squash.
-- If feedback is unclear, ask for clarification in the PR thread.
-
-Review SLA can vary. If a PR is stale, rebase on latest `main`, resolve conflicts, and post a short status update.
-
-Thanks for helping make App Finder 100k more robust and useful.
+The main rule is mutual respect. Welcome, and thank you for your contribution!
+[![OstinUA](https://capsule-render.vercel.app/api?type=rect&color=3e80ed&height=2&)](https://github.com/OstinUA)
