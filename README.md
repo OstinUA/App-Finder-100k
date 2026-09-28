@@ -10,6 +10,9 @@
 [![Data Source](https://img.shields.io/badge/Data-Google%20Play%20Scraper-34A853?style=for-the-badge)](https://pypi.org/project/google-play-scraper/)
 [![Storage](https://img.shields.io/badge/Storage-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](#project-structure)
 
+> https://github.com/OstinUA/random-google-play-game-scraper - Python version
+
+
 A production-minded Streamlit toolkit for hunting Google Play apps in specific install ranges, de-duplicating findings across sessions, and exporting clean research datasets in one click.
 
 > [!IMPORTANT]
